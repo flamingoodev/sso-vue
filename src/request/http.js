@@ -3,7 +3,7 @@
  * 请求拦截、响应拦截、错误统一处理
  */
 import axios from 'axios'
-import router from '../router'
+import router from '../router/router'
 import store from '../store/store'
 import qs from 'qs'
 import { Message } from 'element-ui'
