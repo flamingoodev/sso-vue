@@ -9,6 +9,7 @@
     <el-container>
       <!--页面顶部-->
       <el-header class="el-header container-header">
+        <el-button type="primary" class="button" @click="buttoncli">摁我全屏</el-button>
         <ContainerHeader @listenIsCollapse="handleIsCollapse" @listenWidth="handleWidth"></ContainerHeader>
       </el-header>
       <!--页面主体-->
@@ -28,9 +29,10 @@
 </template>
 
 <script>
-import ContainerHeader from '../components/common/Header'
-import ContainerMenu from '../components/common/Menu'
-import ContainerFooter from '../components/common/Footer'
+import ContainerHeader from '@/layout/components/Header'
+import ContainerMenu from '@/layout/components/Menu'
+import ContainerFooter from '@/layout/components/Footer'
+import screenfull from 'screenfull'
 export default {
   components: {
     ContainerHeader,
@@ -39,11 +41,15 @@ export default {
   },
   data () {
     return {
+      isFullscreen: false,
       width: '200px',
       isCollapse: false
     }
   },
   methods: {
+    buttoncli () {
+      screenfull.toggle()
+    },
     /**
        * 处理菜单折叠
        * @param childIsCollapse
