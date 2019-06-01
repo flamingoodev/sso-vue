@@ -11,6 +11,12 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
+      path: '/login',
+      name: 'login',
+      meta: { title: '登录' },
+      component: Login
+    },
+    {
       path: '/',
       name: 'home',
       meta: { title: '主页' },
@@ -24,24 +30,11 @@ export default new Router({
           hidden: true
         }
       ]
-    }, {
-      path: '/login',
-      name: 'login',
-      meta: { title: '登录' },
-      component: Login
     },
     {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/about',
+      path: '/404',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ '../views/404.vue')
+      component: () => import('@/views/404')
     }
   ]
 })

@@ -9,11 +9,11 @@ import '@/assets/iconfont/iconfont.js'
 import Vuex from 'vuex'
 import Api from '@/api'
 import Constant from '@/constant/constant'
-import CustomLocale from '@/locale'
+import i18n from '@/locale'
 
 Vue.use(ElementUI, {
   size: Constant.elementSize,
-  i18n: (key, value) => CustomLocale.t(key, value) })
+  i18n: (key, value) => i18n.t(key, value) })
 Vue.use(Vuex)
 Vue.prototype.$api = Api
 Vue.prototype.$const = Constant
@@ -22,5 +22,6 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
+  i18n,
   render: h => h(App)
 }).$mount('#app')
