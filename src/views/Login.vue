@@ -53,19 +53,27 @@ export default {
         password: [
           { required: true, validator: checkPassword, trigger: 'blur' }
         ]
-      }
+      },
+      redirect: undefined
+    }
+  },
+  watch: {
+    $route: {
+      handler: function (route) {
+        this.redirect = route.query && route.query.redirect
+      },
+      immediate: true
     }
   },
   methods: {
     toLogin () {
       this.loading = true
-      this.$api.user.userList().then(res => {
-        this.loading = false
-        this.$router.replace('/')
-        console.log(res.data)
+      this.$store.dispatch('login', this.loginForm).then(() => {
+        this.$router.push({ path: this.redirect || '/' }).catch((err) => {
+          console.log(err)
+        })
       }).catch(err => {
-        this.loading = false
-        console.log(err.statusText)
+        console.log(err)
       })
     }
   }
@@ -78,7 +86,7 @@ export default {
     top: 5%;
     left: calc(50% - 200px);
     width: 370px;
-    height: 45%;
+    height: 450px;
   }
   .login-title {
     font-size: 16px;

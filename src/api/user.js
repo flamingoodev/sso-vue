@@ -1,27 +1,38 @@
+import http from '../request/http'
+
 /**
- * user模块接口列表
+ * 用户接口
  */
-
-import domain from './domain' // 导入接口域名列表
-import axios from '../request/http' // 导入http中创建的axios实例
-import qs from 'qs' // 根据需求是否导入qs模块
-
-const user = {
-  // 用户列表
-  userList () {
-    return axios.get(`${domain.sso}/user/list`)
-  },
-  // 用户信息
-  userInfo (id, params) {
-    return axios.get(`${domain.sso}/user/${id}`, {
+const userApi = {
+  /**
+   * 登录
+   */
+  login (params) {
+    return http({
+      url: '/api/user/login',
+      method: 'post',
       params: params
     })
   },
-  // post提交
-  login (params) {
-    return axios.post(`${domain.sso}/token`, qs.stringify(params))
+  /**
+   * 用户列表
+   */
+  userList () {
+    return http({
+      url: '/api/user/list',
+      method: 'get'
+    })
+  },
+  /**
+   * 用户信息
+   */
+  userInfo (id, params) {
+    return http({
+      url: `/api/user/${id}`,
+      method: 'get',
+      params: params
+    })
   }
-  // 其他接口…
 }
 
-export default user
+export default userApi

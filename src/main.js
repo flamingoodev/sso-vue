@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from '@/App.vue'
-import router from '@/router/router'
+import router from '@/router'
 import store from '@/store/store'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -10,6 +10,7 @@ import Vuex from 'vuex'
 import Api from '@/api'
 import Constant from '@/constant/constant'
 import i18n from '@/locale'
+import '@/utils/permission'
 
 Vue.use(ElementUI, {
   size: Constant.elementSize,

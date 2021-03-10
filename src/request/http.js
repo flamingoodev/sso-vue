@@ -3,7 +3,7 @@
  * 请求拦截、响应拦截、错误统一处理
  */
 import axios from 'axios'
-import router from '../router/router'
+import router from '../router'
 import store from '../store/store'
 import qs from 'qs'
 import { Message } from 'element-ui'
@@ -42,6 +42,10 @@ const toLogin = () => {
     query: {
       redirect: router.currentRoute.fullPath
     }
+  }).then(r => {
+    console.log(r)
+  }).catch(err => {
+    console.error(err)
   })
 }
 
@@ -71,6 +75,10 @@ const errorHandle = (status, other) => {
     case 404:
       errorMsg('请求的资源不存在')
       break
+    // 500服务器错误
+    case 500:
+      errorMsg('系统异常，请联系管理员')
+      break
     default:
       console.log(other)
   }
@@ -79,9 +87,14 @@ const errorHandle = (status, other) => {
 /**
  * 创建axios实例
  */
-const instance = axios.create({ timeout: 3000 })
-// 设置post请求头
-instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+const instance = axios.create({
+  timeout: 1000 * 10,
+  baseURL: process.env.VUE_APP_BASE_API,
+  withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8'
+  }
+})
 
 /**
  * 请求拦截器
