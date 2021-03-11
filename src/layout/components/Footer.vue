@@ -1,6 +1,5 @@
 <template>
   <div class="footer">
-    <span>©Flamingo 2019</span>
   </div>
 </template>
 

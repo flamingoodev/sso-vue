@@ -1,8 +1,6 @@
 <template>
   <div class="header">
     <div style="width: 18px; cursor: pointer;" @click.prevent="toggleSideBar">
-      <i v-show="!isCollapse" class="el-icon-d-arrow-left"></i>
-      <i v-show="isCollapse" class="el-icon-d-arrow-right"></i>
     </div>
     <span>header</span>
   </div>

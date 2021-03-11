@@ -2,27 +2,22 @@
   <el-container  class="container-body">
     <!--页面左侧菜单栏-->
     <el-aside :width="width" class="el-aside container-aside">
-      <el-menu class="container-menu">
-        <ContainerMenu :isCollapse="isCollapse"></ContainerMenu>
-      </el-menu>
+      个人中心
     </el-aside>
     <el-container>
       <!--页面顶部-->
       <el-header class="el-header container-header">
-        <el-button type="primary" class="button" @click="buttoncli">摁我全屏</el-button>
-        <ContainerHeader @listenIsCollapse="handleIsCollapse" @listenWidth="handleWidth"></ContainerHeader>
+        111
       </el-header>
       <!--页面主体-->
       <el-main class="el-main container-main">
-        <el-breadcrumb separator-class="el-icon-arrow-right">
-          <el-breadcrumb-item><a href="/">首页</a></el-breadcrumb-item>
-          <el-breadcrumb-item :to="{ path: item.path }" v-for="(item, index) in breadcrumb" :key="index">{{item.name}}</el-breadcrumb-item>
-        </el-breadcrumb>
-        <router-view/>
+        <keep-alive>
+          <router-view :key="key" />
+        </keep-alive>
       </el-main>
       <!--页面底部-->
       <el-footer class="el-footer container-footer">
-        <ContainerFooter></ContainerFooter>
+
       </el-footer>
     </el-container>
   </el-container>
@@ -30,13 +25,10 @@
 
 <script>
 import ContainerHeader from '@/layout/components/Header'
-import ContainerMenu from '@/layout/components/Menu'
 import ContainerFooter from '@/layout/components/Footer'
-import screenfull from 'screenfull'
 export default {
   components: {
     ContainerHeader,
-    ContainerMenu,
     ContainerFooter
   },
   data () {
@@ -47,25 +39,11 @@ export default {
     }
   },
   methods: {
-    buttoncli () {
-      screenfull.toggle()
-    },
-    /**
-       * 处理菜单折叠
-       * @param childIsCollapse
-       */
-    handleIsCollapse: function (childIsCollapse) {
-      this.isCollapse = childIsCollapse
-    },
-    /**
-       * 处理菜单折叠后宽度改变
-       * @param childWidth
-       */
-    handleWidth: function (childWidth) {
-      this.width = childWidth
-    }
   },
   computed: {
+    key() {
+      return this.$route.path
+    },
     breadcrumb () {
       return this.$route.meta.title
     }
@@ -94,10 +72,11 @@ export default {
     width: 100%;
   }
   .container-aside {
-    color: #333;
     text-align: left;
   }
   .container-main {
+    height: 100%;
+    width: 100%;
   }
   .container-footer {
     padding: 0 0;

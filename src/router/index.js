@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from '@/views/Index'
+import Home from '@/views/Home'
 import NotFound from '@/views/404.vue'
 import Login from '@/views/Login.vue'
 import Redirect from '@/views/Redirect.vue'
+import Developer from '@/views/developer'
 
 Vue.use(Router)
 
@@ -29,10 +30,17 @@ export default new Router({
     },
     {
       path: '/',
-      name: 'index',
+      name: 'home',
       meta: { title: '主页' },
-      component: Index,
-      children: []
+      component: Home,
+      children: [
+        {
+          path: '/developer',
+          name: 'developer',
+          meta: { title: '开发者' },
+          component: Developer
+        }
+      ]
     },
     // note
     // 404 page must be placed at the end !!!
